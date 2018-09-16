@@ -18,7 +18,7 @@ const getWeather = () => {
   const API_KEY = "a53130cd66281fe281431da75fa09d0e";
   let city = document.querySelector(".city").value;
   let country = "us";
-  console.log("city =", city);
+
   fetch(
     `https://api.openweathermap.org/data/2.5/forecast?q=${city},${country}&appid=${API_KEY}&units=imperial&cnt=40`
   )
@@ -32,14 +32,10 @@ const getWeather = () => {
           ? weatherArr.push(weather)
           : "";
       });
-      console.log(weatherArr.length);
+
       let output = "";
       let capitalized = `${city.charAt(0).toUpperCase()}${city.slice(1)}`;
       weatherArr.forEach(function(list, key) {
-        console.log(
-          Object.values(arrOfDays[new Date(list.dt * 1000).getDay()])
-        );
-
         key === 0
           ? ((document.querySelector(
               ".title"
@@ -56,8 +52,7 @@ const getWeather = () => {
         }.png" alt="weather icon"/>
       </div>
         `))
-          : (console.log("list", list, key),
-            (output += `
+          : (output += `
             <div class="card">
               <h3 class="day">${Object.values(
                 arrOfDays[new Date(list.dt * 1000).getDay()]
@@ -70,7 +65,7 @@ const getWeather = () => {
                 list.weather[0].icon
               }.png" alt="weather icon"/>
             </div>
-            `));
+            `);
       });
       document.querySelector(".weather-out").innerHTML = output;
     });
@@ -79,7 +74,6 @@ const getWeather = () => {
 window.addEventListener("keyup", e => {
   if (e.keyCode === 13 && cityInput.length > 1) {
     getWeather();
-    console.log("pressing enter");
   }
 });
 
