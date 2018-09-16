@@ -1,0 +1,105 @@
+$main: #5c45bb;
+$accent: #e0dce3;
+$secondary: #8b7dad;
+
+body {
+  margin: 0;
+  padding: 0;
+  background: $main;
+  color: $accent;
+}
+
+.frame {
+  text-align: center;
+  font-family: "Montserrat", sans-serif;
+}
+
+.title {
+  text-align: center;
+  text-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
+}
+
+.input {
+  input {
+    border-radius: 3px;
+    background: $main;
+    color: $accent;
+    border: 1px solid $secondary;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
+    font-size: 1.2rem;
+  }
+
+  button {
+    background: $secondary;
+    border-radius: 3px;
+    color: $accent;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
+    font-size: 1.2rem;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
+
+.current-weather {
+  width: 200px;
+  height: 200px;
+  position: relative;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+  margin: 10px;
+  padding: 10px;
+
+  .day {
+    font-size: 2.5em;
+    margin: 0;
+    padding: 0;
+  }
+
+  .temp {
+    margin: 10px;
+    font-size: 2em;
+  }
+}
+
+.card {
+  display: inline-block;
+  width: 160px;
+  height: 200px;
+  text-align: center;
+  border: 1px solid #eee;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 3px;
+  padding: 10px;
+  margin: 10px;
+}
+
+.day {
+  font-size: 1.5em;
+}
+
+.description {
+  overflow: auto;
+  max-height: 40px;
+}
+
+.weather-out {
+  text-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
+}
+
+::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: $accent;
+  opacity: 1; /* Firefox */
+}
+
+:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  color: $accent;
+}
+
+::-ms-input-placeholder {
+  /* Microsoft Edge */
+  color: $accent;
+}
