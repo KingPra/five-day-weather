@@ -64,7 +64,8 @@ const getWeather = () => {
 };
 
 window.addEventListener("keyup", e => {
-  if (e.keyCode === 13 && cityInput.length > 1) {
+  city = document.querySelector(".city").value;
+  if (e.keyCode === 13 && city.length > 1) {
     getWeather();
   }
 });
