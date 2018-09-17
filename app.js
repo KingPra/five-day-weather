@@ -20,10 +20,11 @@ const getWeather = () => {
   let country = "us";
 
   fetch(
-    `https://api.openweathermap.org/data/2.5/forecast?q=${city},${country}&appid=${API_KEY}&units=imperial&cnt=40`
+    `https://api.openweathermap.org/data/2.5/forecast?q=${city},${country}&appid=${API_KEY}&units=imperial`
   )
     .then(response => response.json())
     .then(data => {
+      console.log(`data:`, data);
       let weatherArr = [];
       let timestamp = new Date(data.list[0].dt * 1000);
 
@@ -37,7 +38,8 @@ const getWeather = () => {
       let capitalized = `${city.charAt(0).toUpperCase()}${city.slice(1)}`;
       weatherArr.forEach(function(list, key) {
         key === 0
-          ? ((document.querySelector(
+          ? (console.log(list),
+            (document.querySelector(
               ".title"
             ).innerHTML = `Five Day Forecast for ${capitalized}`),
             (output = `
@@ -52,7 +54,12 @@ const getWeather = () => {
         }.png" alt="weather icon"/>
       </div>
         `))
-          : (output += `
+          : (console.log(
+              `min and max temps: ${list.main.temp_min} and ${
+                list.main.temp_max
+              }`
+            ),
+            (output += `
             <div class="card">
               <h3 class="day">${Object.values(
                 arrOfDays[new Date(list.dt * 1000).getDay()]
@@ -65,7 +72,7 @@ const getWeather = () => {
                 list.weather[0].icon
               }.png" alt="weather icon"/>
             </div>
-            `);
+            `));
       });
       document.querySelector(".weather-out").innerHTML = output;
     });
