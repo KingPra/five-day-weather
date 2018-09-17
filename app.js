@@ -20,59 +20,44 @@ const getWeather = () => {
   let country = "us";
 
   fetch(
-    `https://api.openweathermap.org/data/2.5/forecast?q=${city},${country}&appid=${API_KEY}&units=imperial`
+    `https://api.openweathermap.org/data/2.5/forecast/daily?q=${city},${country}&appid=${API_KEY}&units=imperial&cnt=6`
   )
     .then(response => response.json())
     .then(data => {
-      console.log(`data:`, data);
-      let weatherArr = [];
-      let timestamp = new Date(data.list[0].dt * 1000);
-
-      data.list.filter(weather => {
-        new Date(weather.dt * 1000).getHours() === timestamp.getHours()
-          ? weatherArr.push(weather)
-          : "";
-      });
-
       let output = "";
       let capitalized = `${city.charAt(0).toUpperCase()}${city.slice(1)}`;
-      weatherArr.forEach(function(list, key) {
+
+      data.list.forEach(function(list, key) {
         key === 0
-          ? (console.log(list),
-            (document.querySelector(
+          ? ((document.querySelector(
               ".title"
             ).innerHTML = `Five Day Forecast for ${capitalized}`),
             (output = `
-        <div class="current-weather">
-        <h3 class="day">${Object.values(
-          arrOfDays[new Date(list.dt * 1000).getDay()]
-        )}</h3>
-        <p class="temp">${Math.round(list.main.temp)}&#176F</p>
-        <p class="description">${list.weather[0].description}</p>
-        <img class="icon" src="http://openweathermap.org/img/w/${
-          list.weather[0].icon
-        }.png" alt="weather icon"/>
-      </div>
-        `))
-          : (console.log(
-              `min and max temps: ${list.main.temp_min} and ${
-                list.main.temp_max
-              }`
-            ),
-            (output += `
-            <div class="card">
-              <h3 class="day">${Object.values(
-                arrOfDays[new Date(list.dt * 1000).getDay()]
-              )}</h3>
-              <p class="temp">${Math.round(
-                list.main.temp_max
-              )}&#176F ${Math.round(list.main.temp_min)}&#176F</p>
-              <p class="description">${list.weather[0].description}</p>
-              <img class="icon" src="http://openweathermap.org/img/w/${
-                list.weather[0].icon
-              }.png" alt="weather icon"/>
-            </div>
-            `));
+            <div class="current-weather">
+            <h3 class="day">${Object.values(
+              arrOfDays[new Date(list.dt * 1000).getDay()]
+            )}</h3>
+            <p class="temp">${Math.round(list.temp.day)}&#176F</p>
+            <p class="description">${list.weather[0].description}</p>
+            <img class="icon" src="http://openweathermap.org/img/w/${
+              list.weather[0].icon
+            }.png" alt="weather icon"/>
+          </div>
+            `))
+          : (output += `
+                <div class="card">
+                  <h3 class="day">${Object.values(
+                    arrOfDays[new Date(list.dt * 1000).getDay()]
+                  )}</h3>
+                  <p class="temp">${Math.round(
+                    list.temp.max
+                  )}&#176F ${Math.round(list.temp.min)}&#176F</p>
+                  <p class="description">${list.weather[0].description}</p>
+                  <img class="icon" src="http://openweathermap.org/img/w/${
+                    list.weather[0].icon
+                  }.png" alt="weather icon"/>
+                </div>
+                `);
       });
       document.querySelector(".weather-out").innerHTML = output;
     });
