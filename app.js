@@ -39,7 +39,7 @@ const getWeather = () => {
             )}</h3>
             <p class="temp">${Math.round(list.temp.day)}&#176F</p>
             <p class="description">${list.weather[0].description}</p>
-            <img class="icon" src="http://openweathermap.org/img/w/${
+            <img class="icon" src="https://openweathermap.org/img/w/${
               list.weather[0].icon
             }.png" alt="weather icon"/>
           </div>
@@ -53,7 +53,7 @@ const getWeather = () => {
                     list.temp.max
                   )}&#176F ${Math.round(list.temp.min)}&#176F</p>
                   <p class="description">${list.weather[0].description}</p>
-                  <img class="icon" src="http://openweathermap.org/img/w/${
+                  <img class="icon" src="https://openweathermap.org/img/w/${
                     list.weather[0].icon
                   }.png" alt="weather icon"/>
                 </div>
